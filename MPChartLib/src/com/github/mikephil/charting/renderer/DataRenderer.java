@@ -145,6 +145,20 @@ public abstract class DataRenderer extends Renderer {
     }
 
     /**
+     * Draws the value of the given entry by using the provided ValueFormatter.
+     *
+     * @param c            canvas
+     * @param value        the string representation of the value to be drawn
+     * @param x            position
+     * @param y            position
+     * @param color
+     */
+    public void drawValue(Canvas c, String value, float x, float y, int color) {
+        mValuePaint.setColor(color);
+        c.drawText(value, x, y, mValuePaint);
+    }
+
+    /**
      * Draws any kind of additional information (e.g. line-circles).
      *
      * @param c

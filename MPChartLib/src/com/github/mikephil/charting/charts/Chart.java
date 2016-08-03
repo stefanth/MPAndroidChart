@@ -34,7 +34,9 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.DefaultValueFormatter;
+import com.github.mikephil.charting.formatter.DefaultValueFormatterStacked;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatterStacked;
 import com.github.mikephil.charting.highlight.ChartHighlighter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.ChartInterface;
@@ -99,6 +101,11 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      * default value-formatter, number of digits depends on provided chart-data
      */
     protected ValueFormatter mDefaultFormatter;
+
+    /**
+     * default stacked value-formatter, number of digits depends on provided chart-data
+     */
+    protected ValueFormatterStacked mDefaultFormatterStacked;
 
     /**
      * paint object used for drawing the description text in the bottom right
@@ -230,6 +237,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         Utils.init(getContext());
 
         mDefaultFormatter = new DefaultValueFormatter(1);
+        mDefaultFormatterStacked = new DefaultValueFormatterStacked(1);
 
         mViewPortHandler = new ViewPortHandler();
 
@@ -959,6 +967,16 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      */
     public ValueFormatter getDefaultValueFormatter() {
         return mDefaultFormatter;
+    }
+
+    /**
+     * Returns the default ValueFormatter that has been determined by the chart
+     * considering the provided minimum and maximum values.
+     *
+     * @return
+     */
+    public ValueFormatterStacked getDefaultValueFormatterStacked() {
+        return mDefaultFormatterStacked;
     }
 
     /**

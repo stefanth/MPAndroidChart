@@ -6,7 +6,9 @@ import android.graphics.Typeface;
 
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.formatter.DefaultValueFormatter;
+import com.github.mikephil.charting.formatter.DefaultValueFormatterStacked;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatterStacked;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
@@ -50,6 +52,11 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
      * custom formatter that is used instead of the auto-formatter if set
      */
     protected transient ValueFormatter mValueFormatter;
+
+    /**
+     * custom formatter that is used instead of the auto-formatter if set
+     */
+    protected transient ValueFormatterStacked mValueFormatterStacked;
 
     /**
      * the typeface used for the value text
@@ -261,6 +268,22 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
         if (mValueFormatter == null)
             return new DefaultValueFormatter(1);
         return mValueFormatter;
+    }
+
+    @Override
+    public void setValueFormatterStacked(ValueFormatterStacked f) {
+
+        if (f == null)
+            return;
+        else
+            mValueFormatterStacked = f;
+    }
+
+    @Override
+    public ValueFormatterStacked getValueFormatterStacked() {
+        if (mValueFormatterStacked == null)
+            return new DefaultValueFormatterStacked(1);
+        return mValueFormatterStacked;
     }
 
     @Override

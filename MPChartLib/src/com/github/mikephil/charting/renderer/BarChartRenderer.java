@@ -12,6 +12,7 @@ import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.buffer.BarBuffer;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatterStacked;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
@@ -300,7 +301,7 @@ public class BarChartRenderer extends DataRenderer {
 
                             trans.pointValuesToPixel(transformed);
 
-                            for (int k = 0; k < transformed.length; k += 2) {
+                            for (int k = 0, idx = 0; k < transformed.length; k += 2, idx++) {
 
                                 float x = valuePoints[j];
                                 float y = transformed[k + 1]
@@ -313,7 +314,10 @@ public class BarChartRenderer extends DataRenderer {
                                         || !mViewPortHandler.isInBoundsLeft(x))
                                     continue;
 
-                                drawValue(c, dataSet.getValueFormatter(), vals[k / 2], entry, i, x, y, color);
+                                ValueFormatterStacked fmt = dataSet.getValueFormatterStacked();
+                                String valueStr = fmt.getFormattedValue(vals[idx], idx, entry, i, mViewPortHandler);
+
+                                drawValue(c, valueStr, x, y, color);
                             }
                         }
                     }

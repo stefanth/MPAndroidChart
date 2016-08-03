@@ -5,7 +5,9 @@ import android.graphics.Typeface;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.StackedValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatterStacked;
 
 import java.util.List;
 
@@ -302,6 +304,24 @@ public interface IDataSet<T extends Entry> {
      * @return
      */
     ValueFormatter getValueFormatter();
+
+    /**
+     * Sets the formatter to be used for drawing the values inside the chart with stacked
+     * values. If no formatter is set, the chart will automatically determine a reasonable
+     * formatting (concerning decimals) for all the values that are drawn inside
+     * the chart. Use chart.getDefaultValueFormatterStacked() to use the formatter
+     * calculated by the chart.
+     *
+     * @param f
+     */
+    void setValueFormatterStacked(ValueFormatterStacked f);
+
+    /**
+     * Returns the formatter used for drawing the values inside stacked charts.
+     *
+     * @return
+     */
+    ValueFormatterStacked getValueFormatterStacked();
 
     /**
      * Sets the color the value-labels of this DataSet should have.
